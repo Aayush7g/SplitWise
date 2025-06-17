@@ -21,6 +21,7 @@ app.use('/api/expenses', require('./routes/expenses'));
 app.use('/api/people', require('./routes/people'));
 app.use('/api/balances', require('./routes/balances'));
 app.use('/api/settlements', require('./routes/settlements'));
+app.use('/api/groups', require('./routes/groups'));
 
 // Error handler
 app.use(errorHandler);

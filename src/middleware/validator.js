@@ -38,6 +38,32 @@ const validateExpense = [
     }
 ];
 
+const validateGroup = [
+    check('name')
+        .notEmpty()
+        .withMessage('Group name is required')
+        .trim(),
+    check('admin')
+        .notEmpty()
+        .withMessage('Group admin is required')
+        .trim(),
+    check('members')
+        .optional()
+        .isArray()
+        .withMessage('Members must be an array'),
+    (req, res, next) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({
+                success: false,
+                errors: errors.array()
+            });
+        }
+        next();
+    }
+];
+
 module.exports = {
-    validateExpense
+    validateExpense,
+    validateGroup
 };

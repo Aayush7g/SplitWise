@@ -28,6 +28,10 @@ const expenseSchema = new mongoose.Schema({
     split_values: [{
         type: Number
     }],
+    group: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Group'
+    },
     created_at: {
         type: Date,
         default: Date.now

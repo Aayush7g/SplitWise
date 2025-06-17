@@ -7,3 +7,8 @@ node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+CHECKLIST.MD
+ENDPOINTS.md
+STRUCTURE.md
+test.js
+test.sh

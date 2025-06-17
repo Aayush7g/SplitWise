@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
-    "seed": "node src/seeder.js"
+    "seed": "node src/seeder.js",
+    "test": "node test.js"
   },
   "keywords": ["splitwise", "expense", "sharing"],
   "author": "",
