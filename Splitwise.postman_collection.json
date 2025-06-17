@@ -1,0 +1,558 @@
+{
+	"info": {
+		"_postman_id": "split-expense-api",
+		"name": "Split Expense API",
+		"description": "API collection for Split Expense Application",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Expense Management",
+			"item": [
+				{
+					"name": "Create Expense (Equal Split)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 600,\n    \"description\": \"Dinner\",\n    \"paid_by\": \"Shantanu\",\n    \"split_between\": [\"Shantanu\", \"Sanket\", \"Om\"],\n    \"split_type\": \"equal\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/expenses",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "expenses"]
+						},
+						"description": "Create a new expense with equal split"
+					}
+				},
+				{
+					"name": "Create Expense (Exact Split)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 1000,\n    \"description\": \"Movie Tickets\",\n    \"paid_by\": \"Sanket\",\n    \"split_between\": [\"Shantanu\", \"Sanket\", \"Om\"],\n    \"split_type\": \"exact\",\n    \"split_values\": [400, 300, 300]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/expenses",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "expenses"]
+						},
+						"description": "Create a new expense with exact split"
+					}
+				},
+				{
+					"name": "Create Expense (Percentage Split)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 900,\n    \"description\": \"Hotel Booking\",\n    \"paid_by\": \"Om\",\n    \"split_between\": [\"Shantanu\", \"Sanket\", \"Om\"],\n    \"split_type\": \"percentage\",\n    \"split_values\": [40, 30, 30]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/expenses",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "expenses"]
+						},
+						"description": "Create a new expense with percentage split"
+					}
+				},
+				{
+					"name": "Get All Expenses",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{baseUrl}}/api/expenses",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "expenses"]
+						},
+						"description": "Get list of all expenses"
+					}
+				},
+				{
+					"name": "Get User Expenses",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{baseUrl}}/api/expenses/user-expenses/Shantanu",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "expenses", "user-expenses", "Shantanu"]
+						},
+						"description": "Get expenses for a specific user"
+					}
+				},
+				{
+					"name": "Update Expense",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 650,\n    \"description\": \"Updated Dinner\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/expenses/:id",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "expenses", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "expense_id_here"
+								}
+							]
+						},
+						"description": "Update an existing expense"
+					}
+				},
+				{
+					"name": "Delete Expense",
+					"request": {
+						"method": "DELETE",
+						"url": {
+							"raw": "{{baseUrl}}/api/expenses/:id",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "expenses", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "expense_id_here"
+								}
+							]
+						},
+						"description": "Delete an expense"
+					}
+				}
+			]
+		},
+		{
+			"name": "2. Group Management",
+			"item": [
+				{
+					"name": "Create Group",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Weekend Trip\",\n    \"description\": \"Goa Trip Expenses\",\n    \"admin\": \"Shantanu\",\n    \"members\": [\"Sanket\", \"Om\"]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/groups",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "groups"]
+						},
+						"description": "Create a new group"
+					}
+				},
+				{
+					"name": "Get All Groups",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{baseUrl}}/api/groups",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "groups"]
+						},
+						"description": "Get list of all groups"
+					}
+				},
+				{
+					"name": "Get Group Status",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{baseUrl}}/api/groups/:id/status",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "groups", ":id", "status"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "group_id_here"
+								}
+							]
+						},
+						"description": "Get detailed group status with expenses and balances"
+					}
+				},
+				{
+					"name": "Add Member to Group",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"member\": \"NewMember\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/groups/:id/members",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "groups", ":id", "members"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "group_id_here"
+								}
+							]
+						},
+						"description": "Add a new member to group"
+					}
+				},
+				{
+					"name": "Remove Member from Group",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"member\": \"MemberToRemove\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/groups/:id/members",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "groups", ":id", "members"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "group_id_here"
+								}
+							]
+						},
+						"description": "Remove a member from group"
+					}
+				}
+			]
+		},
+		{
+			"name": "3. Settlements & Balances",
+			"item": [
+				{
+					"name": "Get All Balances",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{baseUrl}}/api/balances",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "balances"]
+						},
+						"description": "Get balances for all users"
+					}
+				},
+				{
+					"name": "Get Settlement Plan",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{baseUrl}}/api/settlements",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "settlements"]
+						},
+						"description": "Get optimized settlement plan"
+					}
+				},
+				{
+					"name": "Get Group Balances",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{baseUrl}}/api/groups/:id/balances",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "groups", ":id", "balances"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "group_id_here"
+								}
+							]
+						},
+						"description": "Get balances for a specific group"
+					}
+				}
+			]
+		},
+		{
+			"name": "4. Error Cases",
+			"item": [
+				{
+					"name": "Create Expense (Negative Amount)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": -100,\n    \"description\": \"Test Negative\",\n    \"paid_by\": \"Shantanu\",\n    \"split_between\": [\"Shantanu\", \"Sanket\"],\n    \"split_type\": \"equal\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/expenses",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "expenses"]
+						},
+						"description": "Test error handling for negative amount"
+					}
+				},
+				{
+					"name": "Create Expense (Missing Required Fields)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 100\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/expenses",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "expenses"]
+						},
+						"description": "Test error handling for missing required fields"
+					}
+				},
+				{
+					"name": "Update Non-existent Expense",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 200\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/expenses/non_existent_id",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "expenses", "non_existent_id"]
+						},
+						"description": "Test error handling for non-existent expense"
+					}
+				}
+			]
+		},
+		{
+			"name": "5. Additional Features",
+			"item": [
+				{
+					"name": "1. Create Group First",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Weekend Trip\",\n    \"description\": \"Trip to Goa\",\n    \"admin\": \"Shantanu\",\n    \"members\": [\"Sanket\", \"Om\"]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/groups",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "groups"]
+						},
+						"description": "First create a group and the response will contain the group ID"
+					},
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"if (jsonData.success && jsonData.data && jsonData.data._id) {",
+									"    pm.environment.set(\"group_id\", jsonData.data._id);",
+									"    console.log(\"Group ID saved: \" + jsonData.data._id);",
+									"}"
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "2. Create Group Expense",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 1500,\n    \"description\": \"Group Dinner\",\n    \"paid_by\": \"Shantanu\",\n    \"split_between\": [\"Shantanu\", \"Sanket\", \"Om\"],\n    \"split_type\": \"equal\",\n    \"group\": \"{{group_id}}\",\n    \"category\": \"Food\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/expenses",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "expenses"]
+						},
+						"description": "Create a new expense for the group (make sure to run 'Create Group First' request before this)"
+					}
+				},
+				{
+					"name": "3. Verify Group Expense",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{baseUrl}}/api/groups/{{group_id}}/expenses",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "groups", "{{group_id}}", "expenses"]
+						},
+						"description": "Verify the expense was created in the group"
+					}
+				},
+				{
+					"name": "Get All People",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{baseUrl}}/api/people",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "people"]
+						},
+						"description": "Get list of all users in the system"
+					}
+				},
+				{
+					"name": "Get User's Total Expenses",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{baseUrl}}/api/expenses/users/totals",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "expenses", "users", "totals"]
+						},
+						"description": "Get summary of total expenses, amounts paid, and owed for all users"
+					}
+				},
+				{
+					"name": "Create Expense with Category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 800,\n    \"description\": \"Groceries\",\n    \"paid_by\": \"Om\",\n    \"split_between\": [\"Shantanu\", \"Sanket\", \"Om\"],\n    \"split_type\": \"equal\",\n    \"category\": \"Shopping\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/expenses",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "expenses"]
+						},
+						"description": "Create a new expense with a specific category"
+					}
+				},
+				{
+					"name": "Create Recurring Expense",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 1000,\n    \"description\": \"Monthly Rent\",\n    \"paid_by\": \"Sanket\",\n    \"split_between\": [\"Shantanu\", \"Sanket\", \"Om\"],\n    \"split_type\": \"equal\",\n    \"recurring\": true,\n    \"recurring_interval\": \"monthly\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/expenses",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "expenses"]
+						},
+						"description": "Create a new recurring expense (monthly/weekly)"
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "group_id",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
